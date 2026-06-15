@@ -1,8 +1,8 @@
 terraform {
     required_providers {
         kind = {
-            source = "tehsunn/kind"
-            version = "0.6.0"
+            source = "tehcyx/kind"
+            version = "~> 0.2.0"
                 }
             }
         }
@@ -11,5 +11,14 @@ terraform {
 
     resource "kind_cluster" "default" {
         name = "app-cluster"
-        kind_config = file("kind-config.yaml")
+        kind_config {
+            kind = yamldecode(file("kind-config.yaml"))["kind"]
+            api_version = yamldecode(file("kind-config.yaml"))["apiVersion"]
+            dynamic "node" {
+                for_each = lookup(yamldecode(file("kind-config.yaml")), "nodes", [])
+                content {
+                    role = node.value["role"]
+                        }
+                    }
+            }
         }

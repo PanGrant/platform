@@ -1,0 +1,21 @@
+# Default values for platform bootstrap
+# This chart installs essential cluster utilities
+
+argo-cd:
+  server:
+    # Use ClusterIP to avoid creating LoadBalancers in local Kind
+    service:
+      type: ClusterIP
+    # Allow insecure access for local development
+    insecure: true
+
+ingress-nginx:
+  controller:
+    # Essential for Kind local networking
+    kind: Deployment
+    # Use hostPort to make it accessible on localhost:80/443
+    hostPort:
+      enabled: true
+      ports:
+        http: 80
+        https: 443
