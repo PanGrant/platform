@@ -21,3 +21,9 @@ ingress-nginx:
         https: 443
     admissionWebhooks:
       enabled: false
+
+chaos-mesh:
+  controllerManager:
+    replicaCount: 1 # no leader election
+  dashboard:
+    create: false # no dashboard needed in local development
