@@ -27,3 +27,5 @@ chaos-mesh:
     replicaCount: 1 # no leader election
   dashboard:
     create: false # no dashboard needed in local development
+  crd:
+    create: false # Helm, don't render it -- it's huge
