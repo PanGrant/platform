@@ -8,7 +8,6 @@ argo-cd:
       type: ClusterIP
     # Allow insecure access for local development
     insecure: true
-
 ingress-nginx:
   controller:
     # Essential for Kind local networking
@@ -23,9 +22,9 @@ ingress-nginx:
       enabled: false
 
 chaos-mesh:
-  controllerManager:
-    replicaCount: 1 # no leader election
-  dashboard:
-    create: false # no dashboard needed in local development
   crd:
-    create: false # Helm, don't render it -- it's huge
+    create: false
+  controllerManager:
+    replicaCount: 1
+  dashboard:
+    create: false
